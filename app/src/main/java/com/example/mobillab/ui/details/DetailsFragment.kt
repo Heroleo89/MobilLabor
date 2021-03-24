@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mobillab.R
 
-class DetailsFragment : Fragment() {
+class DetailsFragment : Fragment(),DetailsScreen {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
