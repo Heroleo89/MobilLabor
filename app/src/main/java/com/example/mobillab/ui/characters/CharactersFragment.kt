@@ -28,7 +28,7 @@ class CharactersFragment  : Fragment(),CharactersScreen {
     }
 
     override fun onDetach() {
-        super.onDetach()
         charactersPresenter.detachScreen()
+        super.onDetach()
     }
 }

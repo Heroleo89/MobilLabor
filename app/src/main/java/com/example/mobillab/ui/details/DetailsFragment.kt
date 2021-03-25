@@ -28,7 +28,7 @@ class DetailsFragment  : Fragment(),DetailsScreen {
     }
 
     override fun onDetach() {
-        super.onDetach()
         detailsPresenter.detachScreen()
+        super.onDetach()
     }
 }
