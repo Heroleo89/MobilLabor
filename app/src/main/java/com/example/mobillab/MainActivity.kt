@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import com.example.mobillab.ui.about.AboutFragment
 import com.example.mobillab.ui.characters.CharactersFragment
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startFragment(){
         supportFragmentManager.commit {
-            add<CharactersFragment>(R.id.container)
+            add<AboutFragment>(R.id.container)
         }
     }
 }
