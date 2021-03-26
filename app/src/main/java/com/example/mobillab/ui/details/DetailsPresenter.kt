@@ -1,7 +1,6 @@
 package com.example.mobillab.ui.details
 
 import android.content.Context
-import android.widget.Toast
 import com.example.mobillab.repo.DetailInteractor
 import com.example.mobillab.ui.Presenter
 import javax.inject.Inject

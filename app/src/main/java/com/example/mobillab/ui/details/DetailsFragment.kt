@@ -2,17 +2,19 @@ package com.example.mobillab.ui.details
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.mobillab.MainApplication
 import com.example.mobillab.R
-import com.example.mobillab.repo.DetailInteractor
-import com.example.mobillab.ui.characters.CharactersPresenter
 import javax.inject.Inject
 
 class DetailsFragment  : Fragment(),DetailsScreen {
+
+    companion object{
+        const val NAME = "Character - Detail"
+    }
 
     @Inject
     lateinit var  detailsPresenter: DetailsPresenter

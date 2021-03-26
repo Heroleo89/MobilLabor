@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/charactersFragment">
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.mobillab.ui.about.AboutFragment"
+        android:label="AboutFragment">
+        <action
+            android:id="@+id/aboutToCharacters"
+            app:destination="@id/charactersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.mobillab.ui.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details">
+        <action
+            android:id="@+id/detailToCharacters"
+            app:destination="@id/charactersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/charactersFragment"
+        android:name="com.example.mobillab.ui.characters.CharactersFragment"
+        android:label="fragment_characters"
+        tools:layout="@layout/fragment_characters">
+        <action
+            android:id="@+id/charactersToAbout"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/charactersToDetail"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+</navigation>
