@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.mobillab.di.ApplicationModule
 import com.example.mobillab.di.CharactersComponent
 import com.example.mobillab.di.DaggerCharactersComponent
-import com.example.mobillab.di.InteractorModule
 
 class MainApplication: Application() {
 

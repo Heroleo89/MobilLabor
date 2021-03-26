@@ -2,4 +2,7 @@
     <string name="app_name">Rick And Morty - Characters</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Characters fragment</string>
+    <string name="logo">Logo</string>
+    <string name="credit_text">App version 1.0\nCreated by DT8CE1</string>
+    <string name="about">About</string>
 </resources>
