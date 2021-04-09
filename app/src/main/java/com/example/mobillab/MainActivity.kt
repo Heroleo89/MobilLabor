@@ -1,11 +1,9 @@
 package com.example.mobillab
 
-import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.os.Debug
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -14,7 +12,6 @@ import com.example.mobillab.ui.about.AboutFragment
 import com.example.mobillab.ui.characters.CharactersFragment
 import com.example.mobillab.ui.details.DetailsFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.Exception
 import kotlin.reflect.KClass
 
 class MainActivity : AppCompatActivity() {
@@ -70,21 +67,21 @@ class MainActivity : AppCompatActivity() {
     private fun <T : Fragment> setToolbarForFragment(fragment: KClass<T>){
         when(fragment){
             AboutFragment::class -> {
-                toolBar.menu.setGroupVisible(0,false)
-                toolBar.navigationIcon = navIcon
-                toolBar.title = AboutFragment.NAME
+                toolBar.setToolBar(AboutFragment.NAME,navIcon,false)
             }
             CharactersFragment::class -> {
-                toolBar.menu.setGroupVisible(0,true)
-                toolBar.navigationIcon = null
-                toolBar.title = CharactersFragment.NAME
+                toolBar.setToolBar(CharactersFragment.NAME,null,true)
             }
             DetailsFragment::class -> {
-                toolBar.menu.setGroupVisible(0,false)
-                toolBar.navigationIcon = navIcon
-                toolBar.title = DetailsFragment.NAME
+                toolBar.setToolBar(DetailsFragment.NAME,navIcon,false)
             }
         }
     }
 
+}
+
+fun Toolbar.setToolBar(name : String, icon: Drawable?, isMenuVisible : Boolean ){
+    menu.setGroupVisible(0,isMenuVisible)
+    navigationIcon = icon
+    title = name
 }

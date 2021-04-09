@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.example.mobillab.MainActivity
 import com.example.mobillab.MainApplication
 import com.example.mobillab.R
-import kotlinx.android.synthetic.main.fragment_characters.*
 import javax.inject.Inject
 
 class CharactersFragment  : Fragment(),CharactersScreen {
