@@ -2,7 +2,6 @@ package com.example.mobillab
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.os.Debug
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -27,21 +26,12 @@ import kotlin.reflect.KClass
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        const val BASE_URL = "https://rickandmortyapi.com/api/"
-    }
-
-    private lateinit var retrofit: Retrofit
     private lateinit var navController: NavController
     private var navIcon: Drawable? = null
-
-    lateinit var characterService : CharacterAPI
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        setupRetrofit()
 
         navIcon = ContextCompat.getDrawable(this, R.drawable.baseline_arrow_back_white_18dp)
 
@@ -59,17 +49,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.detailsFragment -> setToolbarForFragment(DetailsFragment::class)
             }
         }
-
-        var chars: List<Character>
-        lifecycleScope.launch(Dispatchers.Main) {
-
-            withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
-               chars = characterService.getCharacters()
-            }
-
-            println(chars.size)
-        }
-
 
         super.onResume()
     }
@@ -108,21 +87,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupRetrofit() {
-
-        val okHttpClient = OkHttpClient()
-                            .newBuilder()
-                            .addInterceptor(CharacterInterceptor())
-                            .build()
-
-        retrofit = Retrofit.Builder()
-                .client(okHttpClient)
-                .baseUrl(BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build()
-
-        characterService = retrofit.create(CharacterAPI::class.java)
-    }
 }
 
 fun Toolbar.setToolBar(name: String, icon: Drawable?, isMenuVisible: Boolean) {

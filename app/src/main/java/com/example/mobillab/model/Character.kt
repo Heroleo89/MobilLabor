@@ -20,7 +20,7 @@ import com.squareup.moshi.JsonClass
  * @param url
  */
 @JsonClass(generateAdapter = true)
-data class Location (
+data class Location(
         val name: String? = null,
         val url: String? = null
 ) {
@@ -33,7 +33,7 @@ data class Location (
  * @param url
  */
 @JsonClass(generateAdapter = true)
-data class Origin (
+data class Origin(
         val name: String? = null,
         val url: String? = null
 ) {
@@ -52,7 +52,7 @@ data class Origin (
  * @param imageUrl
  */
 @JsonClass(generateAdapter = true)
-data class Character (
+data class Character(
         val id: Int? = null,
         val name: String? = null,
         val status: String? = null,
@@ -60,9 +60,22 @@ data class Character (
         val type: String? = null,
         val origin: Origin? = null,
         val location: Location? = null,
-        val imageUrl: String? = null
+        val image: String? = null
 ) {
-
+        override fun toString(): String {
+                val sb = StringBuilder()
+                sb.append("class Character {\n")
+                sb.append("    id: ").append((id)).append("\n")
+                sb.append("    name: ").append((name)).append("\n")
+                sb.append("    status: ").append((status)).append("\n")
+                sb.append("    species: ").append((species)).append("\n")
+                sb.append("    type: ").append((type)).append("\n")
+                sb.append("    origin: ").append((origin)).append("\n")
+                sb.append("    location: ").append((location)).append("\n")
+                sb.append("    image: ").append((image)).append("\n")
+                sb.append("}")
+                return sb.toString()
+        }
 }
 
 

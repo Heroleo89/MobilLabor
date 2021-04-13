@@ -1,3 +1,5 @@
 package com.example.mobillab.ui.characters
 
-interface CharactersScreen {}
+interface CharactersScreen {
+    fun showCharacters()
+}

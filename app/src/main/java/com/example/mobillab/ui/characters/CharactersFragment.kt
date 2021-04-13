@@ -6,8 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.mobillab.MainApplication
 import com.example.mobillab.R
+import kotlinx.android.synthetic.main.fragment_characters.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CharactersFragment  : Fragment(),CharactersScreen {
@@ -27,10 +33,23 @@ class CharactersFragment  : Fragment(),CharactersScreen {
         super.onAttach(context)
         (context.applicationContext as MainApplication).injector.inject(this)
         charactersPresenter.attachScreen(this)
+
+        showCharacters()
     }
 
     override fun onDetach() {
         charactersPresenter.detachScreen()
         super.onDetach()
+    }
+
+    override fun showCharacters() {
+        lifecycleScope.launch(Dispatchers.Main){
+        delay(5000)
+           val chars =  withContext(lifecycleScope.coroutineContext + Dispatchers.IO) { charactersPresenter.getCharacters() }
+            var charString = ""
+            chars.forEach {  charString += chars.toString() + "\n\n" }
+
+            tv.text = charString
+        }
     }
 }
