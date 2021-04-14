@@ -28,7 +28,7 @@ interface CharacterAPI {
     @PUT("character")
     suspend fun updateCharacter(
         @Body body: Character
-    ): Character
+    ): Character?
 
     /**
      * Add character

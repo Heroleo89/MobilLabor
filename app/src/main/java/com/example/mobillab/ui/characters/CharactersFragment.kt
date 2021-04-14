@@ -49,7 +49,9 @@ class CharactersFragment  : Fragment(),CharactersScreen {
             var charString = ""
             chars.forEach {  charString += chars.toString() + "\n\n" }
 
-            tv.text = charString
+            tv?.let {
+                it.text = charString
+            }
         }
     }
 }
