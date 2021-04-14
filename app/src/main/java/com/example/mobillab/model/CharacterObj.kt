@@ -1,5 +1,8 @@
 package com.example.mobillab.model
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 
 /**
@@ -36,9 +39,9 @@ data class Location(
 data class Origin(
         val name: String? = null,
         val url: String? = null
-) {
+)
 
-}
+
 
 /**
  *
@@ -52,7 +55,9 @@ data class Origin(
  * @param imageUrl
  */
 @JsonClass(generateAdapter = true)
-data class Character(
+@Entity
+data class CharacterObj(
+        @PrimaryKey(autoGenerate = false)
         val id: Int? = null,
         val name: String? = null,
         val status: String? = null,

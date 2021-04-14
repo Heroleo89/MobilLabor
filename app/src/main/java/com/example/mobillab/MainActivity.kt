@@ -6,22 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.example.mobillab.model.Character
-import com.example.mobillab.repo.network.CharacterAPI
-import com.example.mobillab.repo.network.CharacterInterceptor
 import com.example.mobillab.ui.about.AboutFragment
 import com.example.mobillab.ui.characters.CharactersFragment
 import com.example.mobillab.ui.details.DetailsFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import kotlin.reflect.KClass
 
 class MainActivity : AppCompatActivity() {

@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.room.Database
 import com.example.mobillab.MainApplication
 import com.example.mobillab.R
+import com.example.mobillab.model.CharacterObj
+import com.example.mobillab.repo.database.CharacterDatabase
 import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -44,10 +47,21 @@ class CharactersFragment  : Fragment(),CharactersScreen {
 
     override fun showCharacters() {
         lifecycleScope.launch(Dispatchers.Main){
-        delay(5000)
-           val chars =  withContext(lifecycleScope.coroutineContext + Dispatchers.IO) { charactersPresenter.getCharacters() }
             var charString = ""
+
+            val chars2 =  CharacterDatabase.getInstance(requireContext()).characterDao().getCharacters()
+            chars2.forEach {  charString += chars2.toString() + "\n\n" }
+
+            tv?.let {
+                it.text = charString
+            }
+        delay(2000)
+           val chars =  withContext(lifecycleScope.coroutineContext + Dispatchers.IO) { charactersPresenter.getCharacters() }
+
+            charString = ""
             chars.forEach {  charString += chars.toString() + "\n\n" }
+
+
 
             tv?.let {
                 it.text = charString

@@ -1,6 +1,6 @@
 package com.example.mobillab.repo.network
 
-import com.example.mobillab.model.Character
+import com.example.mobillab.model.CharacterObj
 import retrofit2.http.*
 
 interface CharacterAPI {
@@ -17,7 +17,7 @@ interface CharacterAPI {
     @GET("character")
     suspend fun getCharacters(
         @Query("name") name: String
-    ): List<Character>
+    ): List<CharacterObj>
 
     /**
      * Update character
@@ -27,8 +27,8 @@ interface CharacterAPI {
     </Character> */
     @PUT("character")
     suspend fun updateCharacter(
-        @Body body: Character
-    ): Character?
+        @Body body: CharacterObj
+    ): CharacterObj?
 
     /**
      * Add character
@@ -38,8 +38,8 @@ interface CharacterAPI {
     </Character> */
     @POST("character")
     suspend fun characterPost(
-        @Body body: Character
-    ): Character?
+        @Body body: CharacterObj
+    ): CharacterObj?
 
     /**
      * Gets characters with given ids
@@ -50,7 +50,7 @@ interface CharacterAPI {
     @GET("character/{id}")
     suspend fun getCharacters(
         @Path("id") id: List<Int>
-    ): List<Character>
+    ): List<CharacterObj>
 
     /**
      * Delete character by ID
