@@ -7,9 +7,11 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="@string/hello_blank_fragment"
+        android:textAlignment="center"
+        android:textSize="120sp" />
 
 </FrameLayout>

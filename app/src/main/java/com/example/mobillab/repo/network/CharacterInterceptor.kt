@@ -1,13 +1,10 @@
 package com.example.mobillab.repo.network
 
 import android.annotation.SuppressLint
-import com.squareup.moshi.Json
 import com.squareup.moshi.JsonReader
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody
-import java.io.Reader
-import java.lang.Exception
 
 class CharacterInterceptor : Interceptor {
     @SuppressLint("CheckResult")

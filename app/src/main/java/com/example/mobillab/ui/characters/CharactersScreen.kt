@@ -1,5 +1,7 @@
 package com.example.mobillab.ui.characters
 
+import com.example.mobillab.model.CharacterObj
+
 interface CharactersScreen {
-    fun showCharacters()
+    fun refreshList(characters : List<CharacterObj>)
 }
