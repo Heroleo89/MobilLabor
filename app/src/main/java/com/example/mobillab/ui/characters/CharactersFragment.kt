@@ -12,22 +12,20 @@ import com.example.mobillab.MainApplication
 import com.example.mobillab.R
 import com.example.mobillab.repo.database.CharacterDatabase
 import com.example.mobillab.ui.characters.listAdapter.CharacterAdapter
+import com.example.mobillab.model.CharacterObj
 import kotlinx.android.synthetic.main.fragment_characters.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class CharactersFragment  : Fragment(),CharactersScreen {
+
+class CharactersFragment : Fragment(), CharactersScreen {
 
     companion object{
         const val NAME = "Characters"
     }
 
     @Inject
-    lateinit var  charactersPresenter: CharactersPresenter
+    lateinit var charactersPresenter: CharactersPresenter
 
     lateinit var adapter: CharacterAdapter
 
@@ -37,7 +35,6 @@ class CharactersFragment  : Fragment(),CharactersScreen {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_characters, container, false)
-
     }
 
     override fun onAttach(context: Context) {
@@ -45,6 +42,7 @@ class CharactersFragment  : Fragment(),CharactersScreen {
         (context.applicationContext as MainApplication).injector.inject(this)
         charactersPresenter.attachScreen(this)
 
+        charactersPresenter.loadCharacters()
 
     }
 
@@ -78,6 +76,9 @@ class CharactersFragment  : Fragment(),CharactersScreen {
         delay(2000)
            val chars =  withContext(lifecycleScope.coroutineContext + Dispatchers.IO) { charactersPresenter.getCharacters() }
             adapter.submitList(chars)
+    override fun refreshList(characters : List<CharacterObj>) {
+        list?.let{
+            it.text = characters.size.toString()
         }
     }
 }
