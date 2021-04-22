@@ -9,7 +9,12 @@ import kotlin.random.Random
 class CharacterInteractor  @Inject constructor( val service : CharacterAPI,val database: CharacterDAO){
 
     suspend fun getRandomCharacters(): List<CharacterObj>{
+
         return service.getCharacters( getUniqueRandomIndices(20))
+    }
+
+    suspend fun saveCharacters(characters : List<CharacterObj>){
+        database.insertCharacters(*characters.toTypedArray())
     }
 
     private fun getUniqueRandomIndices(n : Int) : List<Int>{

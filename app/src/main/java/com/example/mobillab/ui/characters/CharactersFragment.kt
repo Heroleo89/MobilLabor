@@ -6,17 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobillab.MainApplication
 import com.example.mobillab.R
-import com.example.mobillab.repo.database.CharacterDatabase
 import com.example.mobillab.ui.characters.listAdapter.CharacterAdapter
 import com.example.mobillab.model.CharacterObj
 import kotlinx.android.synthetic.main.fragment_characters.*
+
 import javax.inject.Inject
-
-
 
 class CharactersFragment : Fragment(), CharactersScreen {
 
@@ -41,9 +38,6 @@ class CharactersFragment : Fragment(), CharactersScreen {
         super.onAttach(context)
         (context.applicationContext as MainApplication).injector.inject(this)
         charactersPresenter.attachScreen(this)
-
-        charactersPresenter.loadCharacters()
-
     }
 
     override fun onDetach() {
@@ -54,31 +48,21 @@ class CharactersFragment : Fragment(), CharactersScreen {
     override fun onResume() {
         super.onResume()
 
+        setupListAdapter()
+
+        charactersPresenter.loadCharacters()
+
+    }
+
+    override fun refreshList(characters : List<CharacterObj>) {
+        adapter.submitList(characters)
+    }
+
+    private fun setupListAdapter(){
         adapter = CharacterAdapter()
         val llm = LinearLayoutManager(requireContext())
         llm.orientation = LinearLayoutManager.VERTICAL
         list.layoutManager = llm
         list.adapter = adapter
-
-        showCharacters()
-
-    }
-
-    override fun showCharacters() {
-        lifecycleScope.launch(Dispatchers.Main){
-            var charString = ""
-
-            val chars2 =  CharacterDatabase.getInstance(requireContext()).characterDao().getCharacters()
-
-            adapter.submitList(chars2)
-
-
-        delay(2000)
-           val chars =  withContext(lifecycleScope.coroutineContext + Dispatchers.IO) { charactersPresenter.getCharacters() }
-            adapter.submitList(chars)
-    override fun refreshList(characters : List<CharacterObj>) {
-        list?.let{
-            it.text = characters.size.toString()
-        }
     }
 }

@@ -12,16 +12,25 @@ class CharactersPresenter @Inject constructor(
     private val context: Context
 ) : Presenter<CharactersScreen?>() {
 
-    fun loadCharacters(){
+    fun loadCharacters() {
 
         MainScope().launch {
-            val savedCharacters =  withContext( Dispatchers.IO) { getSavedCharacters() }
+
+            val savedCharacters = withContext(Dispatchers.IO) { getSavedCharacters() }
             screen?.refreshList(savedCharacters)
 
-            val refreshed = withContext( Dispatchers.IO) { characterInteractor.getRandomCharacters() }
-            delay(2000)
-            screen?.refreshList(refreshed)
+            if (savedCharacters.isEmpty()) {
+                val refreshed =
+                    withContext(Dispatchers.IO) { characterInteractor.getRandomCharacters() }
+                screen?.refreshList(refreshed)
+                saveCharacters(refreshed)
+            }
         }
+    }
+
+    private suspend fun saveCharacters(characters: List<CharacterObj>) {
+
+        characterInteractor.saveCharacters(characters)
     }
 
     private suspend fun getSavedCharacters(): List<CharacterObj> {
