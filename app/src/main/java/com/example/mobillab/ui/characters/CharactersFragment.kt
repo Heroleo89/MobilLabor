@@ -7,17 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.room.Database
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobillab.MainApplication
 import com.example.mobillab.R
-import com.example.mobillab.model.CharacterObj
 import com.example.mobillab.repo.database.CharacterDatabase
+import com.example.mobillab.ui.characters.listAdapter.CharacterAdapter
 import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+
 
 class CharactersFragment  : Fragment(),CharactersScreen {
 
@@ -28,8 +29,15 @@ class CharactersFragment  : Fragment(),CharactersScreen {
     @Inject
     lateinit var  charactersPresenter: CharactersPresenter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    lateinit var adapter: CharacterAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_characters, container, false)
+
     }
 
     override fun onAttach(context: Context) {
@@ -37,7 +45,7 @@ class CharactersFragment  : Fragment(),CharactersScreen {
         (context.applicationContext as MainApplication).injector.inject(this)
         charactersPresenter.attachScreen(this)
 
-        showCharacters()
+
     }
 
     override fun onDetach() {
@@ -45,27 +53,31 @@ class CharactersFragment  : Fragment(),CharactersScreen {
         super.onDetach()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        adapter = CharacterAdapter()
+        val llm = LinearLayoutManager(requireContext())
+        llm.orientation = LinearLayoutManager.VERTICAL
+        list.layoutManager = llm
+        list.adapter = adapter
+
+        showCharacters()
+
+    }
+
     override fun showCharacters() {
         lifecycleScope.launch(Dispatchers.Main){
             var charString = ""
 
             val chars2 =  CharacterDatabase.getInstance(requireContext()).characterDao().getCharacters()
-            chars2.forEach {  charString += chars2.toString() + "\n\n" }
 
-            tv?.let {
-                it.text = charString
-            }
+            adapter.submitList(chars2)
+
+
         delay(2000)
            val chars =  withContext(lifecycleScope.coroutineContext + Dispatchers.IO) { charactersPresenter.getCharacters() }
-
-            charString = ""
-            chars.forEach {  charString += chars.toString() + "\n\n" }
-
-
-
-            tv?.let {
-                it.text = charString
-            }
+            adapter.submitList(chars)
         }
     }
 }
