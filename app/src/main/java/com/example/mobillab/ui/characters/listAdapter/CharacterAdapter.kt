@@ -5,18 +5,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.mobillab.R
 import com.example.mobillab.model.CharacterObj
+import com.example.mobillab.ui.characters.CharactersFragment
 
-class CharacterAdapter : ListAdapter<CharacterObj, CharactersViewHolder>(CharacterDiffCallback()) {
+class CharacterAdapter(val fragment : CharactersFragment) : ListAdapter<CharacterObj, CharactersViewHolder>(CharacterDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): CharactersViewHolder {
         return CharactersViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.character_item, parent, false)
+                .inflate(R.layout.character_item, parent, false),fragment
         )
     }
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
-        holder.bindTo(getItem(position))
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            holder.bindTo(getItem(position))
+        }
     }
 
 }

@@ -59,7 +59,7 @@ class CharactersFragment : Fragment(), CharactersScreen {
     }
 
     private fun setupListAdapter(){
-        adapter = CharacterAdapter()
+        adapter = CharacterAdapter(this)
         val llm = LinearLayoutManager(requireContext())
         llm.orientation = LinearLayoutManager.VERTICAL
         list.layoutManager = llm
