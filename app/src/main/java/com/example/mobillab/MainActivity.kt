@@ -2,6 +2,7 @@ package com.example.mobillab
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -10,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.mobillab.ui.about.AboutFragment
 import com.example.mobillab.ui.characters.CharactersFragment
+import com.example.mobillab.ui.characters.OnButtonActionListener
 import com.example.mobillab.ui.details.DetailsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.reflect.KClass
@@ -18,6 +20,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private var navIcon: Drawable? = null
+
+    var onButtonClickListener : OnButtonActionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.charactersFragment -> setToolbarForFragment(CharactersFragment::class)
                 R.id.detailsFragment -> setToolbarForFragment(DetailsFragment::class)
             }
+        }
+
+        addButton.setOnClickListener {
+            onButtonClickListener?.onAction()
         }
 
         super.onResume()
@@ -67,12 +75,15 @@ class MainActivity : AppCompatActivity() {
         when (fragment) {
             AboutFragment::class -> {
                 toolBar.setToolBar(AboutFragment.NAME, navIcon, false)
+                addButton.visibility = View.INVISIBLE
             }
             CharactersFragment::class -> {
                 toolBar.setToolBar(CharactersFragment.NAME, null, true)
+                addButton.visibility = View.VISIBLE
             }
             DetailsFragment::class -> {
                 toolBar.setToolBar(DetailsFragment.NAME, navIcon, false)
+                addButton.visibility = View.INVISIBLE
             }
         }
     }

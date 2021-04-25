@@ -21,5 +21,4 @@ class CharacterAdapter(val fragment : CharactersFragment) : ListAdapter<Characte
             holder.bindTo(getItem(position))
         }
     }
-
 }

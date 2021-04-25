@@ -28,6 +28,14 @@ class CharactersPresenter @Inject constructor(
         }
     }
 
+    fun deleteCharacter(character : CharacterObj){
+        MainScope().launch {
+            withContext(Dispatchers.IO) {  characterInteractor.database.deleteCharacter(character) }
+            val savedCharacters = withContext(Dispatchers.IO) { getSavedCharacters() }
+            screen?.refreshList(savedCharacters)
+        }
+    }
+
     private suspend fun saveCharacters(characters: List<CharacterObj>) {
 
         characterInteractor.saveCharacters(characters)

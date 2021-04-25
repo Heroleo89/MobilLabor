@@ -7,17 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mobillab.MainActivity
 import com.example.mobillab.MainApplication
 import com.example.mobillab.R
 import com.example.mobillab.ui.characters.listAdapter.CharacterAdapter
 import com.example.mobillab.model.CharacterObj
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_characters.*
+import java.lang.Exception
 
 import javax.inject.Inject
 
-class CharactersFragment : Fragment(), CharactersScreen {
+class CharactersFragment : Fragment(), CharactersScreen,OnButtonActionListener {
 
-    companion object{
+    companion object {
         const val NAME = "Characters"
     }
 
@@ -38,6 +41,8 @@ class CharactersFragment : Fragment(), CharactersScreen {
         super.onAttach(context)
         (context.applicationContext as MainApplication).injector.inject(this)
         charactersPresenter.attachScreen(this)
+
+        (context as MainActivity).onButtonClickListener = this
     }
 
     override fun onDetach() {
@@ -48,21 +53,42 @@ class CharactersFragment : Fragment(), CharactersScreen {
     override fun onResume() {
         super.onResume()
 
+        addButton?.setOnClickListener{
+
+        }
+
         setupListAdapter()
 
         charactersPresenter.loadCharacters()
 
     }
 
-    override fun refreshList(characters : List<CharacterObj>) {
+    override fun refreshList(characters: List<CharacterObj>) {
         adapter.submitList(characters)
     }
 
-    private fun setupListAdapter(){
+    fun deleteCharacter(character: CharacterObj) {
+
+        try {
+            charactersPresenter.deleteCharacter(character)
+        }catch (e: Exception){
+            println("Couldn't delete Character : $character \n" + e.message )
+        }
+    }
+
+    private fun setupListAdapter() {
         adapter = CharacterAdapter(this)
         val llm = LinearLayoutManager(requireContext())
         llm.orientation = LinearLayoutManager.VERTICAL
         list.layoutManager = llm
         list.adapter = adapter
     }
+
+    override fun onAction() {
+
+    }
+}
+
+interface OnButtonActionListener{
+    fun onAction()
 }

@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +32,11 @@ class CharactersViewHolder (itemView: View,val fragment: CharactersFragment) : R
             .with(fragment)
             .load(char.image)
             .circleCrop()
-            .into(itemView.findViewById<ImageView>(R.id.image))
+            .into(itemView.findViewById(R.id.image))
+
+        itemView.findViewById<ImageView>(R.id.delete).setOnClickListener {
+            fragment.deleteCharacter(char)
+        }
     }
 
 }
