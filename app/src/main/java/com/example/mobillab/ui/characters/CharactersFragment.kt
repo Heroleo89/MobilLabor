@@ -1,10 +1,15 @@
 package com.example.mobillab.ui.characters
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobillab.MainActivity
@@ -28,6 +33,8 @@ class CharactersFragment : Fragment(), CharactersScreen,OnButtonActionListener {
     lateinit var charactersPresenter: CharactersPresenter
 
     lateinit var adapter: CharacterAdapter
+
+    lateinit var searchDialog : SearchDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +64,8 @@ class CharactersFragment : Fragment(), CharactersScreen,OnButtonActionListener {
 
         }
 
+        searchDialog =  SearchDialog(this,this::addSearch)
+
         setupListAdapter()
 
         charactersPresenter.loadCharacters()
@@ -85,8 +94,14 @@ class CharactersFragment : Fragment(), CharactersScreen,OnButtonActionListener {
     }
 
     override fun onAction() {
-
+        searchDialog.showDialog()
     }
+
+    private fun addSearch(named : String){
+
+        charactersPresenter.getCharactersByName(named)
+    }
+
 }
 
 interface OnButtonActionListener{
