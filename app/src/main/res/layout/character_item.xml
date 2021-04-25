@@ -66,7 +66,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="50dp"
         android:background="@color/list_background"
-        android:textColor="@color/list_text"
+        android:textColor="@color/list_text2"
         android:textSize="24sp"
         app:autoSizeMaxTextSize="24sp"
         app:autoSizeMinTextSize="8sp"
