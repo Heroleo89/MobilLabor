@@ -7,4 +7,5 @@
     <string name="character_icon">CharacterIcon</string>
     <string name="delete_icon">delete_icon</string>
     <string name="life_bar">life_bar</string>
+    <string name="add_button">addbutton</string>
 </resources>

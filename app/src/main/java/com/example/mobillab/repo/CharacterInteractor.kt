@@ -13,6 +13,10 @@ class CharacterInteractor  @Inject constructor( val service : CharacterAPI,val d
         return service.getCharacters( getUniqueRandomIndices(20))
     }
 
+    suspend fun getCharactersByName(name : String): List<CharacterObj>{
+        return service.getCharacters(name)
+    }
+
     suspend fun saveCharacters(characters : List<CharacterObj>){
         database.insertCharacters(*characters.toTypedArray())
     }
