@@ -1,14 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2E2E2E"
     tools:context=".ui.details.DetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/detail_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Details" />
+        android:layout_height="300dp"
+        android:background="@color/list_text"
+        android:contentDescription="@string/detail_image"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/black"
+        tools:src="@color/black" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_name_text"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="#2C2C2C"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/list_text2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="16sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="1sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/detail_image" />
+
+    <TextView
+        android:id="@+id/tv_origin_text"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="#2C2C2C"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/list_text2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="16sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="1sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_gender_text" />
+
+    <TextView
+        android:id="@+id/tv_status_text"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="#2C2C2C"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/list_text2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="16sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="1sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_text" />
+
+    <TextView
+        android:id="@+id/tv_species_text"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="#2C2C2C"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/list_text2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="16sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="1sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_status_text" />
+
+    <TextView
+        android:id="@+id/tv_gender_text"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="#2C2C2C"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/list_text2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="16sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="1sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_species_text" />
+
+    <TextView
+        android:id="@+id/tv_location_text"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="#2C2C2C"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/list_text2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="16sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="1sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_origin_text" />
+
+    <TextView
+        android:id="@+id/tv_origin"
+        android:layout_width="100dp"
+        android:layout_height="64dp"
+        android:background="#222222"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/origin"
+        android:textColor="@color/list_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_gender" />
+
+    <TextView
+        android:id="@+id/tv_gender"
+        android:layout_width="100dp"
+        android:layout_height="64dp"
+        android:background="#222222"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/type"
+        android:textColor="@color/list_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_species" />
+
+    <TextView
+        android:id="@+id/tv_species"
+        android:layout_width="100dp"
+        android:layout_height="64dp"
+        android:background="#222222"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/species"
+        android:textColor="@color/list_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_status" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="100dp"
+        android:layout_height="64dp"
+        android:background="#222222"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/location"
+        android:textColor="@color/list_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_origin" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="100dp"
+        android:layout_height="64dp"
+        android:background="#222222"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/name"
+        android:textColor="@color/list_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_image" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="100dp"
+        android:layout_height="64dp"
+        android:background="#222222"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/status"
+        android:textColor="@color/list_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

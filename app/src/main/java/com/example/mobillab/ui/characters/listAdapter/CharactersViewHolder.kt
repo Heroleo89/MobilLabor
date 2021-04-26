@@ -7,9 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mobillab.MainActivity
 import com.example.mobillab.R
 import com.example.mobillab.model.CharacterObj
 import com.example.mobillab.ui.characters.CharactersFragment
@@ -37,6 +39,12 @@ class CharactersViewHolder (itemView: View,val fragment: CharactersFragment) : R
         itemView.findViewById<ImageView>(R.id.delete).setOnClickListener {
             fragment.deleteCharacter(char)
         }
+
+        itemView.setOnClickListener {
+            val bundle = bundleOf("character" to char)
+            (fragment.requireActivity() as MainActivity ).navController.navigate(R.id.charactersToDetail,bundle)
+        }
+
     }
 
 }

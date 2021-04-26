@@ -33,9 +33,9 @@ class CharactersFragment : Fragment(), CharactersScreen,OnButtonActionListener {
     @Inject
     lateinit var charactersPresenter: CharactersPresenter
 
-    lateinit var adapter: CharacterAdapter
+    private lateinit var adapter: CharacterAdapter
 
-    lateinit var searchDialog : SearchDialog
+    private lateinit var searchDialog : SearchDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -110,7 +110,6 @@ class CharactersFragment : Fragment(), CharactersScreen,OnButtonActionListener {
     private fun addSearch(named : String){
         charactersPresenter.getCharactersByName(named)
     }
-
 }
 
 interface OnButtonActionListener{

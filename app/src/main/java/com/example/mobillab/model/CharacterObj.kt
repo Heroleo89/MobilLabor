@@ -1,8 +1,11 @@
 package com.example.mobillab.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.versionedparcelable.ParcelField
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Rick and Morty Characters API
@@ -22,12 +25,11 @@ import com.squareup.moshi.JsonClass
  * @param url
  */
 @JsonClass(generateAdapter = true)
+@Parcelize
 data class Location(
         val name: String? = null,
         val url: String? = null
-) {
-
-}
+) : Parcelable
 
 /**
  *
@@ -35,10 +37,11 @@ data class Location(
  * @param url
  */
 @JsonClass(generateAdapter = true)
+@Parcelize
 data class Origin(
         val name: String? = null,
         val url: String? = null
-)
+):Parcelable
 
 
 
@@ -54,6 +57,7 @@ data class Origin(
  * @param imageUrl
  */
 @JsonClass(generateAdapter = true)
+@Parcelize
 @Entity
 data class CharacterObj(
         @PrimaryKey(autoGenerate = false)
@@ -65,7 +69,7 @@ data class CharacterObj(
         val origin: Origin? = null,
         val location: Location? = null,
         val image: String? = null
-) {
+) : Parcelable {
         override fun toString(): String {
                 val sb = StringBuilder()
                 sb.append("class Character {\n")

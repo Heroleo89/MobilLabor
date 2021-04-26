@@ -18,7 +18,7 @@ import kotlin.reflect.KClass
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
+    lateinit var navController: NavController
     private var navIcon: Drawable? = null
 
     var onButtonClickListener : OnButtonActionListener? = null
@@ -87,7 +87,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }
 
 fun Toolbar.setToolBar(name: String, icon: Drawable?, isMenuVisible: Boolean) {
