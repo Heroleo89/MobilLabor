@@ -7,6 +7,7 @@ import com.example.mobillab.repo.CharacterInteractor
 import com.example.mobillab.ui.Presenter
 import kotlinx.coroutines.*
 import java.lang.Exception
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class CharactersPresenter @Inject constructor(
@@ -30,42 +31,73 @@ class CharactersPresenter @Inject constructor(
         }
     }
 
-    fun getCharactersByName(name : String){
+    fun updateCharacters(){
         MainScope().launch {
-           val matchesCount =  withContext(Dispatchers.IO) {
 
-               val matchesCount = try {
-                   val matches = characterInteractor.getCharactersByName(name)
-                   characterInteractor.database.insertCharacters(*matches.toTypedArray())
-                   matches.size
-               }catch (e : Exception){
-                    0
-               }
+            val refreshed = withContext(Dispatchers.IO) {
 
-               matchesCount
+                val result: List<CharacterObj>
+
+                try {
+                    result = characterInteractor.getRandomCharacters()
+                }catch (e : Exception){
+                    return@withContext emptyList<CharacterObj>()
+                }
+
+                if(result.isNotEmpty()){
+                    characterInteractor.database.deleteAllCharacters()
+                    characterInteractor.database.insertCharacters(*result.toTypedArray())
+                }
+
+                characterInteractor.database.getCharacters()
             }
 
-            if(matchesCount > 0 ){
+            if(refreshed.isEmpty()){
+                Toast.makeText(context,"Couldn't refresh list",Toast.LENGTH_LONG).show()
+                screen?.stopRefreshing()
+            }
+            else
+                screen?.refreshList(refreshed)
+        }
+    }
+
+    fun getCharactersByName(name: String) {
+        MainScope().launch {
+
+            var matchesCount = 0
+
+            //Ignore server response to empty name string
+            if (name.isNotBlank()) {
+                matchesCount = withContext(Dispatchers.IO) {
+
+                    matchesCount = try {
+                        val matches = characterInteractor.getCharactersByName(name)
+                        characterInteractor.database.insertCharacters(*matches.toTypedArray())
+                        matches.size
+                    } catch (e: Exception) {
+                        0
+                    }
+                    matchesCount
+                }
+            }
+
+            if (matchesCount > 0) {
                 val characters = withContext(Dispatchers.IO) {
                     characterInteractor.database.getCharacters()
                 }
                 screen?.refreshList(characters)
-                Toast.makeText(context,"$matchesCount character added.",Toast.LENGTH_LONG).show()
-            }
-            else
-                Toast.makeText(context,"No character was found.",Toast.LENGTH_LONG).show()
-
-
-
-
+                Toast.makeText(context, "$matchesCount match(es).", Toast.LENGTH_LONG).show()
+            } else
+                Toast.makeText(context, "No character was found.", Toast.LENGTH_LONG).show()
         }
     }
 
-    fun deleteCharacter(character : CharacterObj){
+    fun deleteCharacter(character: CharacterObj) {
         MainScope().launch {
             val savedCharacters = withContext(Dispatchers.IO) {
                 characterInteractor.database.deleteCharacter(character)
-                getSavedCharacters() }
+                getSavedCharacters()
+            }
             screen?.refreshList(savedCharacters)
         }
     }

@@ -20,6 +20,7 @@ import com.example.mobillab.model.CharacterObj
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_characters.*
 import java.lang.Exception
+import java.net.SocketTimeoutException
 
 import javax.inject.Inject
 
@@ -68,12 +69,21 @@ class CharactersFragment : Fragment(), CharactersScreen,OnButtonActionListener {
 
         setupListAdapter()
 
+        swipe_container.setOnRefreshListener {
+            charactersPresenter.updateCharacters()
+        }
+
         charactersPresenter.loadCharacters()
 
     }
 
     override fun refreshList(characters: List<CharacterObj>) {
+        swipe_container.isRefreshing = false
         adapter.submitList(characters)
+    }
+
+    override fun stopRefreshing() {
+        swipe_container.isRefreshing = false
     }
 
     fun deleteCharacter(character: CharacterObj) {
@@ -98,7 +108,6 @@ class CharactersFragment : Fragment(), CharactersScreen,OnButtonActionListener {
     }
 
     private fun addSearch(named : String){
-
         charactersPresenter.getCharactersByName(named)
     }
 
