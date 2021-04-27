@@ -2,8 +2,7 @@ package com.example.mobillab
 
 import android.os.Build
 import com.example.mobillab.di.testInjector
-import com.example.mobillab.model.CharacterObj
-import com.example.mobillab.repo.CharacterInteractor
+import com.example.mobillab.ui.characters.CharactersPresenter
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -16,53 +15,58 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
-@ObsoleteCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
-class InteractorTest {
+class PresenterTest {
     @Inject
-    lateinit var characterInteractor: CharacterInteractor
+    lateinit var charactersPresenter: CharactersPresenter
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
+
+    private val mockScreen = MockCharacterScreen()
 
     @Throws(Exception::class)
     @Before
     fun setup() {
         testInjector.inject(this)
         Dispatchers.setMain(mainThreadSurrogate)
+        charactersPresenter.attachScreen(mockScreen)
     }
 
     @After
-    fun tearDown() {
+    fun teardown() {
         Dispatchers.resetMain()
         mainThreadSurrogate.close()
+        charactersPresenter.detachScreen()
     }
 
     @Test
     @Config(sdk = [Build.VERSION_CODES.O_MR1])
-    fun getRandomCharactersTest() {
+    fun presenterLoadTest() {
 
         runBlocking {
-            launch(Dispatchers.Main) {
-               val chars = characterInteractor.getRandomCharacters()
-
-                assertThat("Couldn't get random characters", chars.size == 20)
+            withContext(Dispatchers.IO) {
+                charactersPresenter.loadCharacters()
             }
+            delay(500)
+            assertThat("Couldn't load characters", mockScreen.refreshed.isNotEmpty())
         }
     }
 
     @Test
     @Config(sdk = [Build.VERSION_CODES.O_MR1])
-    fun saveCharactersTest() {
+    fun presenterUpdateTest() {
 
         runBlocking {
-            launch(Dispatchers.Main) {
-
-                characterInteractor.saveCharacters(listOf(CharacterObj(1111)))
-                val saved = characterInteractor.database.getCharacters().find { it.id == 1111 }
-
-                assertThat("Couldn't save characters", saved != null)
+            val listBefore = mockScreen.refreshed
+            withContext(Dispatchers.IO) {
+                charactersPresenter.updateCharacters()
             }
+
+            delay(1500)
+            assertThat(
+                "Couldn't refresh character list",
+                mockScreen.refreshed.hashCode() != listBefore.hashCode()
+            )
         }
     }
 }
