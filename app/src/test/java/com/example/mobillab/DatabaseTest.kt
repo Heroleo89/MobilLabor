@@ -23,9 +23,6 @@ import javax.inject.Inject
 class DatabaseTest {
 
     @Inject
-    lateinit var charactersPresenter: CharactersPresenter
-
-    @Inject
     lateinit var characterInteractor: CharacterInteractor
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
