@@ -1,6 +1,7 @@
 package com.example.mobillab.di
 
 import com.example.mobillab.DatabaseTest
+import com.example.mobillab.ServiceTest
 import dagger.Component
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -12,4 +13,5 @@ interface TestComponent : CharactersComponent{
     @ObsoleteCoroutinesApi
     @ExperimentalCoroutinesApi
     fun inject(databaseTest: DatabaseTest)
+    fun inject(serviceTest: ServiceTest)
 }

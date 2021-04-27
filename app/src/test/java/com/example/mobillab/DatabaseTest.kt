@@ -110,7 +110,7 @@ class DatabaseTest {
                 characterInteractor.database.deleteAllCharacters()
                 val chars = characterInteractor.database.getCharacters()
 
-                assertThat("Couldn't delete character from database", chars.isEmpty())
+                assertThat("Couldn't delete all characters from database", chars.isEmpty())
             }
         }
     }
