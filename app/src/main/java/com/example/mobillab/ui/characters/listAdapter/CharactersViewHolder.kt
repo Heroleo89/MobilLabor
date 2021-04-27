@@ -1,23 +1,18 @@
 package com.example.mobillab.ui.characters.listAdapter
 
-import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
-import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobillab.MainActivity
 import com.example.mobillab.R
 import com.example.mobillab.model.CharacterObj
 import com.example.mobillab.ui.characters.CharactersFragment
-import kotlinx.android.synthetic.main.character_item.view.*
 import java.util.*
-import javax.inject.Inject
 
 class CharactersViewHolder (itemView: View,val fragment: CharactersFragment) : RecyclerView.ViewHolder(itemView) {
 

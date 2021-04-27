@@ -7,12 +7,12 @@ class CharacterMockService : CharacterAPI {
 
     companion object {
         var MOCK_DATA: MutableList<CharacterObj> = mutableListOf()
-    }
 
-    init {
-        val url = "https://cdn.w600.comps.canstockphoto.com/can-stock-photo_csp48405438.jpg"
-        for (i in 0 until 671) {
-            MOCK_DATA.add(CharacterObj(i, "nameFromNet$i", "alive", image = url))
+        init {
+            val url = "https://cdn.w600.comps.canstockphoto.com/can-stock-photo_csp48405438.jpg"
+            for (i in 0 until 671) {
+                MOCK_DATA.add(CharacterObj(i, "nameFromNet$i", "alive", image = url))
+            }
         }
     }
 
@@ -22,7 +22,7 @@ class CharacterMockService : CharacterAPI {
     }
 
     override suspend fun getCharacters(id: List<Int>): List<CharacterObj> {
-        var list = mutableListOf<CharacterObj>()
+        val list = mutableListOf<CharacterObj>()
         for (i in id) {
             val match = MOCK_DATA.find { it.id == i }
             if (match != null)

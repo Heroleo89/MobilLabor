@@ -3,7 +3,6 @@ package com.example.mobillab.model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.versionedparcelable.ParcelField
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
@@ -54,7 +53,7 @@ data class Origin(
  * @param type
  * @param origin
  * @param location
- * @param imageUrl
+ * @param image
  */
 @JsonClass(generateAdapter = true)
 @Parcelize

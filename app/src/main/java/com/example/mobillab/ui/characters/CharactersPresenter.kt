@@ -6,8 +6,6 @@ import com.example.mobillab.model.CharacterObj
 import com.example.mobillab.repo.CharacterInteractor
 import com.example.mobillab.ui.Presenter
 import kotlinx.coroutines.*
-import java.lang.Exception
-import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class CharactersPresenter @Inject constructor(

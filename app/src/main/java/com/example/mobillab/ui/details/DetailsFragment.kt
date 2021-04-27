@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.example.mobillab.MainApplication
 import com.example.mobillab.R
 import com.example.mobillab.model.CharacterObj
-import kotlinx.android.synthetic.main.character_item.*
 import kotlinx.android.synthetic.main.fragment_details.*
 import javax.inject.Inject
 

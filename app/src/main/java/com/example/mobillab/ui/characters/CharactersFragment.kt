@@ -1,27 +1,19 @@
 package com.example.mobillab.ui.characters
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobillab.MainActivity
 import com.example.mobillab.MainApplication
 import com.example.mobillab.R
-import com.example.mobillab.ui.characters.listAdapter.CharacterAdapter
 import com.example.mobillab.model.CharacterObj
+import com.example.mobillab.ui.characters.listAdapter.CharacterAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_characters.*
-import java.lang.Exception
-import java.net.SocketTimeoutException
-
 import javax.inject.Inject
 
 class CharactersFragment : Fragment(), CharactersScreen,OnButtonActionListener {
