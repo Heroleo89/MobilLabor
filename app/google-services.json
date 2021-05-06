@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "873005087846",
+    "project_id": "mobillab-12156",
+    "storage_bucket": "mobillab-12156.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873005087846:android:27e72e57e1cda713b701a7",
+        "android_client_info": {
+          "package_name": "com.example.mobillab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873005087846-s52aidvo6kjkitsi1tvn4tfflcn764ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTYaBUJdY-ZBHf0dgzifMi12DxnTdUW7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873005087846-s52aidvo6kjkitsi1tvn4tfflcn764ep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

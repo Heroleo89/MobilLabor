@@ -6,7 +6,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules=[InteractorModule::class,ApplicationModule::class, MockNetworkModule::class,MockDatabaseModule::class])
+@Component(modules=[InteractorModule::class,ApplicationModule::class, NetworkModule::class,DatabaseModule::class])
 interface CharactersComponent{
     fun inject(charactersFragment: CharactersFragment)
     fun inject(detailsFragment: DetailsFragment)
