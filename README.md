@@ -1,1 +1,1 @@
-# MobilLabor
+# Rick and Morty Character Browser 
