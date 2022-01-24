@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">MobilLab</string>
+    <string name="app_name">Rick And Morty - Characters</string>
+    <string name="hello_blank_fragment">Characters fragment</string>
+    <string name="logo">Logo</string>
+    <string name="credit_text">App version 1.0\nCreated by DT8CE1</string>
+    <string name="about">About</string>
+    <string name="character_icon">CharacterIcon</string>
+    <string name="delete_icon">delete_icon</string>
+    <string name="life_bar">life_bar</string>
+    <string name="add_button">addbutton</string>
+    <string name="detail_image">detail image</string>
+    <string name="origin">Origin</string>
+    <string name="type">Type</string>
+    <string name="location">Location</string>
+    <string name="name">Name</string>
+    <string name="status">Status</string>
+    <string name="species">Species</string>
 </resources>
